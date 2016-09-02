@@ -1,0 +1,15 @@
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\EBTracker.exe.config
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\EBTracker.exe
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\EBTracker.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\EloBuddy.dll
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\EloBuddy.Sandbox.dll
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\EloBuddy.SDK.dll
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\Newtonsoft.Json.dll
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\SharpDX.Direct3D9.dll
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\bin\Debug\SharpDX.dll
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\obj\Debug\EBTracker.Properties.Resources.resources
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\obj\Debug\EBTracker.csproj.GenerateResource.Cache
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\obj\Debug\EBTracker.exe
+c:\users\administrator\documents\visual studio 2015\Projects\EBTracker\EBTracker\obj\Debug\EBTracker.pdb
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\EBTracker\EBTracker\obj\Debug\EBTracker.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\EBTracker\EBTracker\obj\Debug\EBTracker.csproj.EBTracker.exe.config
