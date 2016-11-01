@@ -1,0 +1,20 @@
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\Orbextra.exe.config
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\Orbextra.exe
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\Orbextra.pdb
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\EloBuddy.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\EloBuddy.SDK.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\SharpDX.Direct3D9.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\SharpDX.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\bin\Release\Newtonsoft.Json.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\obj\Release\Orbextra.exe
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\Orbextra\Orbextra\obj\Release\Orbextra.pdb
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\Orbextra.exe.config
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\Orbextra.exe
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\Orbextra.pdb
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\EloBuddy.dll
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\EloBuddy.SDK.dll
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\SharpDX.Direct3D9.dll
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\SharpDX.dll
+E:\Git dev\Dev for EB\Orbextra\Orbextra\bin\Release\Newtonsoft.Json.dll
+E:\Git dev\Dev for EB\Orbextra\Orbextra\obj\Release\Orbextra.exe
+E:\Git dev\Dev for EB\Orbextra\Orbextra\obj\Release\Orbextra.pdb
