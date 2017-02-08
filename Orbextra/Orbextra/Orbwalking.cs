@@ -1,4 +1,4 @@
-﻿namespace Orbextra
+namespace Orbextra
 {
     using System;
     using System.Collections.Generic;
@@ -23,6 +23,7 @@
 
         public static AIHeroClient ForcedTarget = null;
 
+        public static int[] LastTargets = new int[] { 0, 0, 0 };
         /// <summary>
         ///     <c>true</c> if the orbwalker will attack.
         /// </summary>
@@ -163,10 +164,9 @@
 
             Player = EloBuddy.Player.Instance;
             _championName = Player.ChampionName;
-            Obj_AI_Base.OnProcessSpellCast += new Obj_AI_ProcessSpellCast(OnProcessSpellCast);
-            Obj_AI_Base.OnBasicAttack += new Obj_AI_BaseOnBasicAttack(OnBasicAttack);
-            Obj_AI_Base.OnSpellCast += new Obj_AI_BaseDoCastSpell(Obj_AI_Base_OnDoCast);
-            Spellbook.OnStopCast += new SpellbookStopCast(SpellbookOnStopCast);
+            Obj_AI_Base.OnProcessSpellCast += OnProcessSpellCast;
+            Obj_AI_Base.OnSpellCast += Obj_AI_Base_OnSpellCast;
+            Obj_AI_Base.OnBasicAttack += OnBasicAttack;
 
             if (Game.Mode == GameMode.Running)
             {
@@ -754,18 +754,18 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="args">The <see cref="GameObjectProcessSpellCastEventArgs" /> instance containing the event data.</param>
-        private static void Obj_AI_Base_OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        private static void Obj_AI_Base_OnSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (sender.IsMe)
             {
                 var ping = Game.Ping;
                 if (ping <= 30) //First world problems kappa
                 {
-                    Core.DelayAction(() => Obj_AI_Base_OnDoCast_Delayed(sender, args), 30 - ping);
+                    Core.DelayAction(() => Obj_AI_Base_OnSpellCast_Delayed(sender, args), 30 - ping);
                     return;
                 }
 
-                Obj_AI_Base_OnDoCast_Delayed(sender, args);
+                Obj_AI_Base_OnSpellCast_Delayed(sender, args);
             }
         }
 
@@ -774,18 +774,22 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="args">The <see cref="GameObjectProcessSpellCastEventArgs" /> instance containing the event data.</param>
-        private static void Obj_AI_Base_OnDoCast_Delayed(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        private static void Obj_AI_Base_OnSpellCast_Delayed(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
 
-            if (IsAutoAttackReset(args.SData.Name))
+            if (sender.IsMe)
             {
-                ResetAutoAttackTimer();
-            }
+                if (IsAutoAttackReset(args.SData.Name))
+                {
+                    Chat.Print("IsAutoAttackReset00000");
+                    //    ResetAutoAttackTimer();
+                }
 
-            if (IsAutoAttack(args.SData.Name))
-            {
-                FireAfterAttack(sender, args.Target as AttackableUnit);
-                _missileLaunched = true;
+                if (IsAutoAttack(args.SData.Name))
+                {
+                    FireAfterAttack(sender, args.Target as AttackableUnit);
+                    _missileLaunched = true;
+                }
             }
         }
 
@@ -798,15 +802,15 @@
         {
             try
             {
-                var spellName = Spell.SData.Name;
+                if (unit.IsMe)
+                {
+                    if (IsAutoAttackReset(Spell.SData.Name) && Spell.SData.SpellCastTime == 0)
+                    {
+                        ResetAutoAttackTimer();
+                    }
 
-                if (unit.IsMe && IsAutoAttackReset(spellName) && Math.Abs(Spell.SData.CastTime) < 1.401298E-45f)
-                {
-                    ResetAutoAttackTimer();
-                }
-                if (!IsAutoAttack(spellName))
-                {
-                    return;
+                    if (!IsAutoAttack(Spell.SData.Name))
+                        return;
                 }
             }
             catch (Exception e)
@@ -815,35 +819,54 @@
             }
         }
 
-        internal static void OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        internal static void OnBasicAttack(Obj_AI_Base unit, GameObjectProcessSpellCastEventArgs Spell)
         {
-            if (sender.IsMe && (args.Target is Obj_AI_Base || args.Target is Obj_BarracksDampener || args.Target is Obj_HQ))
+            if (unit.IsMe)
             {
-                LastAATick = Core.GameTickCount - Game.Ping / 2;
-                _missileLaunched = false;
-                LastMoveCommandT = 0;
-                _autoattackCounter++;
+                var spellName = Spell.SData.Name;
 
-                if (args.Target is Obj_AI_Base)
+                if (IsAutoAttackReset(spellName) && Spell.SData.SpellCastTime == 0)
                 {
-                    var target = (Obj_AI_Base)args.Target;
-                    if (target.IsValid)
+                    Chat.Print("IsAutoAttackReset66666");
+                    //    ResetAutoAttackTimer();
+                }
+
+                if (!IsAutoAttack(spellName))
+                    return;
+
+                if (Spell.Target is Obj_AI_Base || Spell.Target is Obj_BarracksDampener || Spell.Target is Obj_HQ)
+                {
+                    PushLastTargets(Spell.Target.NetworkId);
+
+                    LastAATick = Core.GameTickCount - Game.Ping / 2;
+                    _missileLaunched = false;
+                    LastMoveCommandT = 0;
+                    _autoattackCounter++;
+
+                    if (Spell.Target is Obj_AI_Base)
                     {
-                        FireOnTargetSwitch(target);
-                        _lastTarget = target;
+                        var target = (Obj_AI_Base)Spell.Target;
+                        if (target.IsValid)
+                        {
+                            FireOnTargetSwitch(target);
+                            _lastTarget = target;
+                        }
                     }
                 }
-
-                if (sender is Obj_AI_Turret && args.Target is Obj_AI_Base)
+                if (unit.IsMelee)
                 {
-                    LastTargetTurrets[sender.NetworkId] = (Obj_AI_Base)args.Target;
+                    Core.DelayAction(() => FireAfterAttack(unit, Spell.Target as AttackableUnit), (int)(unit.AttackCastDelay * 1000 + 40));
                 }
             }
-            FireOnAttack(sender, _lastTarget);
+
+            FireOnAttack(unit, _lastTarget);
         }
-
-        internal static readonly Dictionary<int, Obj_AI_Base> LastTargetTurrets = new Dictionary<int, Obj_AI_Base>();
-
+        private static void PushLastTargets(int networkId)
+        {
+            LastTargets[2] = LastTargets[1];
+            LastTargets[1] = LastTargets[0];
+            LastTargets[0] = networkId;
+        }
         /// <summary>
         ///     Fired when the spellbook stops casting a spell.
         /// </summary>
