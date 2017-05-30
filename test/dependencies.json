@@ -21,7 +21,7 @@
       "Download": "https://raw.github.com/EloBuddy/EloBuddy.Dependencies/master/System/EloBuddy.Fedora.dll"
     },
     "System\\EloBuddy.SDK.dll": {
-      "MD5": "6de68e37affaac1fb591ca5a216ceb5d",
+      "MD5": "024e2b3f176d1d90559b4674f984e18a",
       "Download": "https://raw.github.com/EloBuddy/EloBuddy.Dependencies/master/System/EloBuddy.SDK.dll"
     },
     "System\\Newtonsoft.Json.dll": {
@@ -257,10 +257,22 @@
           "Download": "https://raw.github.com/EloBuddy/EloBuddy.Dependencies/master/Core/7.10-riot-hf/EloBuddy.Core.dll"
         }
       }
+    },
+    "1689b6a91da479f65068720dd0a0e997": {
+      "Files": {
+        "System\\EloBuddy.dll": {
+          "MD5": "c92e934ecc7960c95dec1108898e4a5a",
+          "Download": "https://raw.github.com/EloBuddy/EloBuddy.Dependencies/master/Core/7.10-garena-h2/EloBuddy.dll"
+        },
+        "System\\EloBuddy.Core.dll": {
+          "MD5": "1d5afb6138c88bd5f3e03cec4918fb60",
+          "Download": "https://raw.github.com/EloBuddy/EloBuddy.Dependencies/master/Core/7.10-garena-h2/EloBuddy.Core.dll"
+        }
+      }
     }
   },
   "Loader": {
-    "MD5": "CD078B4AAEA17614C27AE6716109CB9D",
+    "MD5": "0c366516aea37877e469571d74e73449",
     "Download": "https://raw.github.com/EloBuddy/EloBuddy.Dependencies/master/Loader/EloBuddy.Loader.exe"
   }
 }
